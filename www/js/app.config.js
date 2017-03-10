@@ -13,12 +13,12 @@
       templateUrl: 'templates/home.html'
     });
 
-    $stateProvider.state('app.list', {
-      url:'/list',
+    $stateProvider.state('app.contacts', {
+      url:'/contacts',
       views: {
         'content': {
-          'templateUrl': 'templates/list.html',
-          'controller': 'ListController as ctrl'
+          'templateUrl': 'templates/contacts.html',
+          'controller': 'ContactsController as ctrl'
         }
       }
     });
