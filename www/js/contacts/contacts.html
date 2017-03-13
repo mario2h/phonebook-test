@@ -3,6 +3,7 @@
       <button ng-click="ctrl.openModal()" class="button button-icon button-clear ion-android-options">
       </button>
   </ion-nav-buttons>
+    <!-- content listas -->
     <ion-content ng-show="ctrl.listPersonas.length > 0">
         <ion-list>
           <ion-item ng-repeat="persona in ctrl.listPersonas | filter:{nombre: ctrl.filterName, apellido: ctrl.filterLName, comunaId: ctrl.filterComuna.id, regionId:ctrl.filterRegion.id}" ng-if="persona.activo === 1" class="item-icon-left" href="#/app/details/{{persona.id}}">
@@ -15,10 +16,13 @@
           <div class="title">Quitar Filtros <i class="icon ion-android-delete"></i></div>
         </div>
     </ion-content>
+    <!-- fin content listas -->
+    <!--content spinner-->
     <ion-content ng-show="ctrl.listPersonas.length === 0" class="text-center">
       <ion-spinner icon="circles"></ion-spinner> Cargando...
     </ion-content>
-
+    <!--fin content spinner-->
+    <!-- template modal filtros -->
     <script id="modalfilter.html" type="text/ng-template">
 			<ion-modal-view>
 				<ion-header-bar class="bar bar-header bar-dark" align-title="center">
@@ -52,4 +56,5 @@
 				</ion-content>
 			</ion-modal-view>
 		</script>
+    <!--fin template modal filtros-->
 </ion-view>
