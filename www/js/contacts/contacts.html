@@ -5,20 +5,18 @@
   </ion-nav-buttons>
     <ion-content ng-show="ctrl.listPersonas.length > 0">
         <ion-list>
-          <ion-item ng-repeat="persona in ctrl.listPersonas | filter:{nombre: ctrl.filterName, apellido: ctrl.filterLName, comunaId: ctrl.filterComuna.id, regionId:ctrl.filterRegion.id} as results" ng-if="persona.activo === 1" class="item-icon-left" href="#/app/details/{{persona.id}}">
+          <ion-item ng-repeat="persona in ctrl.listPersonas | filter:{nombre: ctrl.filterName, apellido: ctrl.filterLName, comunaId: ctrl.filterComuna.id, regionId:ctrl.filterRegion.id}" ng-if="persona.activo === 1" class="item-icon-left" href="#/app/details/{{persona.id}}">
             <i class="icon ion-android-contact positive"></i>
             <h2>{{persona.nombre}} {{persona.apellido}}</h2>
             <p><i ng-show="!ctrl.validaRut(persona.rut)" class="ion-alert-circled assertive"></i> {{persona.rut | rut}}</p>
           </ion-item>
         </ion-list>
+        <div ng-show="ctrl.filtros" ng-click="ctrl.LimpiaFiltro()" class="bar bar-footer bar-dark">
+          <div class="title">Quitar Filtros <i class="icon ion-android-delete"></i></div>
+        </div>
     </ion-content>
     <ion-content ng-show="ctrl.listPersonas.length === 0" class="text-center">
       <ion-spinner icon="circles"></ion-spinner> Cargando...
-    </ion-content>
-    <ion-content>
-      <div ng-show="ctrl.filtros" ng-click="ctrl.LimpiaFiltro()" class="bar bar-footer bar-dark">
-        <div class="title">Quitar Filtros <i class="icon ion-android-delete"></i></div>
-      </div>
     </ion-content>
 
     <script id="modalfilter.html" type="text/ng-template">
