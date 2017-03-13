@@ -3,7 +3,8 @@
 
   angular
     .module('starter.services', [])
-    .factory('ContactsServices', ContactsServices);
+    .factory('ContactsServices', ContactsServices)
+    .factory('GetterAndSetter', GetterAndSetter);
 
     //--------- [injeccion de dependencias] ---------//
     ContactsServices.$inject = ['$http', '$log', '$q'];
@@ -64,5 +65,38 @@
         }
         return d.promise;
       }
+    }
+
+    function GetterAndSetter(){
+
+    	var persData = '';
+    	var regData = '';
+
+    	var service = {
+    		getPersonas: getPersonas,
+    		getRegiones: getRegiones,
+    		setPersonas: setPersonas,
+    		setRegiones: setRegiones
+    	};
+
+    	return service;
+
+    	function getPersonas(){
+    		return persData;
+    	}
+
+    	function getRegiones(){
+			  return regData;
+    	}
+
+    	function setPersonas(data){
+    		persData = data;
+    	}
+
+    	function setRegiones(data){
+    		regData = data;
+    	}
+
+
     }
 })();

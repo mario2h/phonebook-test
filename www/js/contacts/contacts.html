@@ -1,14 +1,57 @@
 <ion-view view-title="Contactos">
+  <ion-nav-buttons side="right">
+      <button ng-click="ctrl.openModal()" class="button button-icon button-clear ion-android-options">
+      </button>
+  </ion-nav-buttons>
     <ion-content ng-show="ctrl.listPersonas.length > 0">
-        <ion-list ng-repeat="persona in ctrl.listPersonas" ng-if="persona.activo === 1">
-            <ion-item class="item-icon-left" ui-sref="app.details('{{persona.id}}')">
-              <i class="icon ion-android-contact positive"></i>
-              <h2>{{persona.nombre}} {{persona.apellido}}</h2>
-              <p><i class="ion-alert-circled assertive"></i> {{persona.rut}}</p>
-            </ion-item>
+        <ion-list>
+          <ion-item ng-repeat="persona in ctrl.listPersonas | filter:{nombre: ctrl.filterName, apellido: ctrl.filterLName, comunaId: ctrl.filterComuna.id, regionId:ctrl.filterRegion.id} as results" ng-if="persona.activo === 1" class="item-icon-left" href="#/app/details/{{persona.id}}">
+            <i class="icon ion-android-contact positive"></i>
+            <h2>{{persona.nombre}} {{persona.apellido}}</h2>
+            <p><i ng-show="!ctrl.validaRut(persona.rut)" class="ion-alert-circled assertive"></i> {{persona.rut | rut}}</p>
+          </ion-item>
         </ion-list>
     </ion-content>
     <ion-content ng-show="ctrl.listPersonas.length === 0" class="text-center">
       <ion-spinner icon="circles"></ion-spinner> Cargando...
     </ion-content>
+    <ion-content>
+      <div ng-show="ctrl.filtros" ng-click="ctrl.LimpiaFiltro()" class="bar bar-footer bar-dark">
+        <div class="title">Quitar Filtros <i class="icon ion-android-delete"></i></div>
+      </div>
+    </ion-content>
+
+    <script id="modalfilter.html" type="text/ng-template">
+			<ion-modal-view>
+				<ion-header-bar class="bar bar-header bar-dark" align-title="center">
+					<h1 class="title">Filtrar Datos</h1>
+					<button class="button button-clear button-primary" ng-click="ctrl.closeModal()">Cerrar</button>
+				</ion-header-bar>
+				<ion-content>
+					<div class="list">
+						<label class="item item-input item-stacked-label">
+							<input type="text" placeholder="Nombre" ng-model="ctrl.nombrePerso">
+						</label>
+						<label class="item item-input item-stacked-label">
+							<input type="text" placeholder="Apellido" ng-model="ctrl.apellidoPerso">
+						</label>
+						<label class="item item-input item-select">
+							<div class="input-label">
+								Región
+							</div>
+							<select ng-model="ctrl.regionName" ng-options="region.nombre for region in ctrl.listRegiones"></select>
+						</label>
+						<label class="item item-input item-select">
+							<div class="input-label">
+								Comuna
+							</div>
+							<select ng-model="ctrl.comunaName" ng-options="comuna.nombre for comuna in ctrl.regionName.comunas" ng-disabled="ctrl.regionName === ''"></select>
+						</label>
+						<button class="button button-block button-positive" ng-click="ctrl.filtrar()" ng-disabled="ctrl.nombrePerso === '' && ctrl.apellidoPerso === '' && ctrl.regionName === '' && ctrl.comunaName === ''">
+							Filtrar
+						</button>
+					</div>
+				</ion-content>
+			</ion-modal-view>
+		</script>
 </ion-view>

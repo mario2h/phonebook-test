@@ -4,4 +4,5 @@ angular.module('starter', [
   'starter.services',
   'starter.contacts',
   'starter.config',
+  'starter.filters',
   'starter.contactsDetails']);

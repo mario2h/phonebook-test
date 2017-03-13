@@ -7,19 +7,19 @@
           <div class="item item-text-wrap">
             <a class="item item-icon-left">
               <i class="icon ion-android-person positive"></i>
-              {{ctrl.personaSelect.nombre}}
+                <span>{{ctrl.personaSelect.nombre}} {{ctrl.personaSelect.apellido}}</span>
             </a>
             <a class="item item-icon-left">
               <i class="icon ion-ios-paper-outline positive"></i>
-              Rut
+                <span ng-class="{'has-error' : !ctrl.validaRut(ctrl.personaSelect.rut)}">{{ctrl.personaSelect.rut | rut}}</span>
             </a>
             <a class="item item-icon-left">
               <i class="icon ion-android-phone-portrait positive"></i>
-              Telefono
+                <span ng-class="{'has-error' : !ctrl.validPhone(ctrl.personaSelect.telefono)}">{{ctrl.personaSelect.telefono | phone}}</span>
             </a>
             <a class="item item-icon-left">
               <i class="icon ion-ios-location-outline positive"></i>
-              Direción
+                <span>{{ctrl.direPersona.calle}} {{ctrl.direPersona.numero}}, {{ctrl.direPersona.comuna.nombre}}</span>
             </a>
           </div>
         </div>
